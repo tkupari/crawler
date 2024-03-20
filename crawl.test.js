@@ -1,19 +1,20 @@
 const { test, expect } = require('@jest/globals')
 const { normalizeURL } = require('./crawl.js')
 
-test('same url is equal to itself', () => {
-  const url = "http://example.com"
-  expect(normalizeURL(url)).toEqual(normalizeURL(url))
+test('http', () => {
+  const url = "http://example.com/path"
+  const expected = "example.com/path"
+  expect(normalizeURL(url)).toEqual(expected)
 })
 
-test('https and http are the same', () => {
-  const http = "http://example.com"
-  const https = "https://example.com"
-  expect(normalizeURL(http)).toEqual(normalizeURL(https))
+test('https', () => {
+  const https = "https://example.com/path"
+  const expected = "example.com/path"
+  expect(normalizeURL(https)).toEqual(expected)
 })
 
-test('trailing slash does not affect', () => {
+test('slash', () => {
   const slash = "http://example.com/path/"
-  const noSlash = "http://example.com/path"
-  expect(normalizeURL(slash)).toEqual(normalizeURL(noSlash))
+  const expected = "example.com/path"
+  expect(normalizeURL(slash)).toEqual(expected)
 })
